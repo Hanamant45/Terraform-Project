@@ -26,6 +26,15 @@ resource "aws_subnet" "cust" {
     }
       
 }
+resource "aws_subnet" "cust2" {
+    vpc_id = aws_vpc.cust.id
+    availability_zone = "ap-southeast-2b"
+    cidr_block = "10.0.2.0/24"
+    tags = {
+      Name = "cust_Subnet_2"
+    }
+      
+}
 
 #Create Route table and Edit Route
 resource "aws_route_table" "cust" {
@@ -74,9 +83,9 @@ egress {
 # Launch instance
 
 resource "aws_instance" "Prod" {
-    ami = "ami-01fb4de0e9f8f22a7"
-    instance_type = "t2.micro"
-    key_name = "key"
+    ami = var.ami
+    instance_type = var.type
+    key_name = var.key
     subnet_id = aws_subnet.cust.id
     vpc_security_group_ids = [aws_security_group.custsg.id]
 
