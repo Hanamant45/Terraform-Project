@@ -8,7 +8,7 @@ variable "ami" {
 variable "type" {
     description = "instance type"
     type = string
-    default = "t2.micro"
+    default = "t2.nano"
   
 }
 variable "key" {
